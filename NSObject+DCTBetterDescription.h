@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface NSObject (DCTBetterDescription)
+- (NSString *)dct_betterDescriptionWithString:(NSString *)string;
 - (NSString *)dct_betterDescriptionWithProperties:(NSArray *)properties;
 @end

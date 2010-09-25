@@ -14,14 +14,19 @@
 	
 	NSMutableString *betterDescription = [[[NSMutableString alloc] init] autorelease];
 	
-	[betterDescription appendFormat:@"<%@: %p", [[self class] description], self];
+	for (NSString *propertyName in properties) {
+		
+		if ([properties indexOfObject:propertyName] != 0)
+			[betterDescription appendString:@"; "];
+		
+		[betterDescription appendFormat:@"%@ = %@", propertyName, [self valueForKey:propertyName]];
+	}
 	
-	for (NSString *propertyName in properties)
-		[betterDescription appendFormat:@"; %@ = %@", propertyName, [self valueForKey:propertyName]];
-	
-	[betterDescription appendString:@">"];
-	
-	return betterDescription;
+	return [self dct_betterDescriptionWithString:betterDescription];
+}
+
+- (NSString *)dct_betterDescriptionWithString:(NSString *)string {
+	return [NSString stringWithFormat:@"<%@: %p; %@>", [[self class] description], self, string];
 }
 
 @end
